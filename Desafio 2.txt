@@ -1,0 +1,26 @@
+import matplotlib.pyplot as plt
+
+# Lista de textos para extração de valores
+textos = [
+    "O valor de venda foi 120.5 e o custo foi 98.3.",
+    "A produção aumentou em 45 unidades este mês.",
+    "O orçamento estimado é de 300000.75 reais.",
+    "A empresa teve um crescimento de 12.45% este ano."
+]
+
+# Padrão regex para encontrar números com ou sem casas decimais
+padrao_numeros = r'\b\d+(?:\.\d+)?\b'
+
+# Extrair números, converter em mil reais (divisão por 1000) e filtrar valores de venda ou orçamento
+valores_vendas = []
+for texto in textos:
+    numeros = re.findall(padrao_numeros, texto)
+    valores_em_mil_reais = [float(num) / 1000 for num in numeros]
+    valores_vendas.extend(valores_em_mil_reais)
+
+# Plotar o boxplot dos valores de vendas
+plt.figure(figsize=(8, 6))
+plt.boxplot(valores_vendas, vert=False)
+plt.title("Boxplot dos Valores de Vendas em Mil Reais")
+plt.xlabel("Valor em Mil Reais")
+plt.show()

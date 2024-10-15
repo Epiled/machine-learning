@@ -1,0 +1,16 @@
+import re
+
+# Lista de textos para extração de CNPJs
+textos = [
+    "A empresa ABC Ltda possui o CNPJ 12.345.678/0001-90.",
+    "O CNPJ da XYZ S.A. é 98.765.432/0002-10, registrado em São Paulo.",
+    "Veja mais informações sobre a empresa com CNPJ 01.234.567/0003-20.",
+    "Não se esqueça de verificar o CNPJ 45.678.901/0004-30 da corporação."
+]
+
+# Padrão regex para o CNPJ
+padrao_cnpj = r'\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}'
+
+# Iterando sobre os textos e extraindo os CNPJs
+resultados = [f"Texto {i + 1}: {re.findall(padrao_cnpj, texto)}" for i, texto in enumerate(textos)]
+resultados
